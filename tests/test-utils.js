@@ -42,7 +42,6 @@ const indexHtmlPath =
   );
 
 
-
 export const TEST_REGION_DATA = [
 
   [
@@ -88,10 +87,10 @@ export const TEST_REGION_DATA = [
 
 ];
 
-
 export async function flushPromises() {
 
   await Promise.resolve();
+
 
   await Promise.resolve();
 
@@ -167,6 +166,7 @@ export async function waitUntil(
 }
 
 
+
 export function getById(
   id
 ) {
@@ -189,6 +189,17 @@ export function setInputValue(
     );
 
 
+  if (
+    !element
+  ) {
+
+    throw new Error(
+      `Element #${id} tidak ditemukan.`
+    );
+
+  }
+
+
   element.value =
     value;
 
@@ -197,7 +208,8 @@ export function setInputValue(
     new Event(
       "input",
       {
-        bubbles: true
+        bubbles:
+          true
       }
     )
   );
@@ -207,7 +219,8 @@ export function setInputValue(
     new Event(
       "change",
       {
-        bubbles: true
+        bubbles:
+          true
       }
     )
   );
@@ -229,6 +242,17 @@ export function selectValue(
     );
 
 
+  if (
+    !select
+  ) {
+
+    throw new Error(
+      `Select #${id} tidak ditemukan.`
+    );
+
+  }
+
+
   select.value =
     value;
 
@@ -237,7 +261,8 @@ export function selectValue(
     new Event(
       "change",
       {
-        bubbles: true
+        bubbles:
+          true
       }
     )
   );
@@ -264,7 +289,7 @@ export function checkRadio(
   ) {
 
     throw new Error(
-      `Radio "${name}" value "${value}" tidak ditemukan.`
+      `Radio "${name}" dengan value "${value}" tidak ditemukan.`
     );
 
   }
@@ -278,7 +303,8 @@ export function checkRadio(
     new Event(
       "change",
       {
-        bubbles: true
+        bubbles:
+          true
       }
     )
   );
@@ -300,6 +326,17 @@ export function setCheckbox(
     );
 
 
+  if (
+    !checkbox
+  ) {
+
+    throw new Error(
+      `Checkbox #${id} tidak ditemukan.`
+    );
+
+  }
+
+
   checkbox.checked =
     checked;
 
@@ -308,7 +345,8 @@ export function setCheckbox(
     new Event(
       "change",
       {
-        bubbles: true
+        bubbles:
+          true
       }
     )
   );
@@ -317,7 +355,6 @@ export function setCheckbox(
   return checkbox;
 
 }
-
 
 
 export function createPdfFile(
@@ -452,6 +489,17 @@ export function setFile(
     );
 
 
+  if (
+    !input
+  ) {
+
+    throw new Error(
+      `File input #${id} tidak ditemukan.`
+    );
+
+  }
+
+
   installFileState(
     input,
     [
@@ -464,7 +512,8 @@ export function setFile(
     new Event(
       "change",
       {
-        bubbles: true
+        bubbles:
+          true
       }
     )
   );
@@ -483,6 +532,17 @@ export function clickNext(
     document.querySelector(
       `[data-form-page="${pageNumber}"] [data-next-page]`
     );
+
+
+  if (
+    !button
+  ) {
+
+    throw new Error(
+      `Next button page ${pageNumber} tidak ditemukan.`
+    );
+
+  }
 
 
   button.click();
@@ -576,6 +636,7 @@ export function createFetchMock({
         urlString.includes(
           "recruiters.csv"
         );
+
 
 
       if (
@@ -806,7 +867,6 @@ export async function bootFrontend({
       "utf8"
     );
 
-
   const htmlWithoutScripts =
     html.replace(
       /<script\b[^>]*>[\s\S]*?<\/script>/gi,
@@ -828,10 +888,8 @@ export async function bootFrontend({
   window.WILAYAH_INDONESIA =
     TEST_REGION_DATA;
 
-
   window.__POWER_AUTOMATE_URL__ =
     powerAutomateUrl;
-
 
 
   Object.entries(
@@ -870,6 +928,8 @@ export async function bootFrontend({
   window.fetch =
     fetchMock;
 
+
+
   vi.spyOn(
     console,
     "info"
@@ -891,14 +951,12 @@ export async function bootFrontend({
 
   }
 
-
   await import(
     "../js/app.js"
   );
 
 
   await flushPromises();
-
 
   await waitUntil(
     () => {
@@ -935,8 +993,10 @@ export async function bootFrontend({
 
 
 export async function fillValidPage2({
-  sameAsKtp = true
+  sameAsKtp = true,
+  skipFiles = []
 } = {}) {
+
 
   setInputValue(
     "namaDepan",
@@ -973,6 +1033,17 @@ export async function fillValidPage2({
     "2000-01-01"
   );
 
+
+  selectValue(
+    "agama",
+    "Islam"
+  );
+
+
+  selectValue(
+    "maritalStatus",
+    "Belum Menikah"
+  );
 
 
   setInputValue(
@@ -1015,7 +1086,6 @@ export async function fillValidPage2({
     "kodePosKtp",
     "10110"
   );
-
 
 
   setCheckbox(
@@ -1107,7 +1177,24 @@ export async function fillValidPage2({
     "081234567892"
   );
 
+
+  if (
+    !skipFiles.includes(
+      "captureAccountTypeLinkAja"
+    )
+  ) {
+
+    setFile(
+      "captureAccountTypeLinkAja",
+      createPdfFile(
+        "CaptureAccountTypeLinkAja_Ara.pdf"
+      )
+    );
+
+  }
+
 }
+
 
 
 export async function fillValidPage3({
@@ -1115,6 +1202,7 @@ export async function fillValidPage3({
   children = false,
   skipFiles = []
 } = {}) {
+
 
   setInputValue(
     "nomorKtp",
@@ -1246,7 +1334,6 @@ export async function fillValidPage3({
 
   }
 
-
   setInputValue(
     "namaPemilikTabungan",
     "Ara Test"
@@ -1292,7 +1379,6 @@ export async function fillValidPage3({
     "0"
   );
 
-
   selectValue(
     "pendidikanTerakhir",
     "Sarjana / S1"
@@ -1315,6 +1401,7 @@ export async function fillValidPage3({
   }
 
 }
+
 
 export async function fillValidPage4({
   groupUnit =
@@ -1391,7 +1478,6 @@ export async function fillValidPage4({
 
 }
 
-
 export async function fillValidForm(
   options = {}
 ) {
@@ -1435,6 +1521,8 @@ export async function fillValidForm(
   await flushPromises();
 
 }
+
+
 export function openSubmitConfirmation() {
 
   getById(

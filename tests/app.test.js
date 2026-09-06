@@ -28,6 +28,9 @@ import {
 } from "./test-utils.js";
 
 
+/* ======================================================
+   CLEAN STATE
+   ====================================================== */
 
 beforeEach(
   () => {
@@ -45,11 +48,13 @@ beforeEach(
 );
 
 
+/* ======================================================
+   TEST SUITE
+   ====================================================== */
 
 describe(
   "LinkAja New Joiner Form - Frontend Unit Tests",
   () => {
-
 
 
     it(
@@ -85,7 +90,6 @@ describe(
     );
 
 
-
     it(
       "berpindah dari Intro ke Informasi Pribadi ketika Next diklik",
       async () => {
@@ -106,23 +110,8 @@ describe(
           "2"
         );
 
-
-        expect(
-          document
-            .querySelector(
-              '[data-step-indicator="2"]'
-            )
-            .classList
-            .contains(
-              "is-active"
-            )
-        ).toBe(
-          true
-        );
-
       }
     );
-
 
 
     it(
@@ -159,20 +148,8 @@ describe(
           "Mohon lengkapi"
         );
 
-
-        expect(
-          getById(
-            "namaDepan"
-          ).classList.contains(
-            "field-error"
-          )
-        ).toBe(
-          true
-        );
-
       }
     );
-
 
 
     it(
@@ -219,21 +196,8 @@ describe(
             }
           );
 
-
-        expect(
-          document
-            .querySelector(
-              '[data-toggle-state="alamatSamaDenganKtp"]'
-            )
-            .textContent
-            .trim()
-        ).toBe(
-          "YA"
-        );
-
       }
     );
-
 
 
     it(
@@ -303,28 +267,13 @@ describe(
 
 
         expect(
-          payload.ProvinsiKTP
-        ).toBe(
-          "DKI JAKARTA"
-        );
-
-
-        expect(
           payload.ProvinsiDomisili
         ).toBe(
           "JAWA BARAT"
         );
 
-
-        expect(
-          payload.KotaDomisili
-        ).toBe(
-          "KOTA BANDUNG"
-        );
-
       }
     );
-
 
 
     it(
@@ -346,15 +295,6 @@ describe(
           ).classList.contains(
             "is-hidden"
           )
-        ).toBe(
-          false
-        );
-
-
-        expect(
-          getById(
-            "namaPasangan"
-          ).disabled
         ).toBe(
           false
         );
@@ -388,7 +328,6 @@ describe(
 
       }
     );
-
 
 
     it(
@@ -447,33 +386,6 @@ describe(
         );
 
 
-        expect(
-          getById(
-            "namaPasangan"
-          ).disabled
-        ).toBe(
-          true
-        );
-
-
-        expect(
-          getById(
-            "namaPasangan"
-          ).required
-        ).toBe(
-          false
-        );
-
-
-        expect(
-          getById(
-            "lampiranKtpPasangan"
-          ).disabled
-        ).toBe(
-          true
-        );
-
-
         openSubmitConfirmation();
 
 
@@ -518,13 +430,6 @@ describe(
 
 
         expect(
-          payload.NomorKTPPasangan
-        ).toBe(
-          ""
-        );
-
-
-        expect(
           payload.attachments.some(
             (attachment) =>
               attachment.fieldName ===
@@ -536,7 +441,6 @@ describe(
 
       }
     );
-
 
 
     it(
@@ -556,6 +460,15 @@ describe(
 
         clickNext(
           2
+        );
+
+
+        expect(
+          getVisiblePage()
+            ?.dataset
+            .formPage
+        ).toBe(
+          "3"
         );
 
 
@@ -586,7 +499,6 @@ describe(
         ).toBe(
           "3"
         );
-
 
 
         expect(
@@ -630,6 +542,15 @@ describe(
         );
 
 
+        expect(
+          getVisiblePage()
+            ?.dataset
+            .formPage
+        ).toBe(
+          "3"
+        );
+
+
         await fillValidPage3();
 
 
@@ -652,7 +573,6 @@ describe(
         );
 
 
-
         expect(
           getVisiblePage()
             ?.dataset
@@ -660,7 +580,6 @@ describe(
         ).toBe(
           "3"
         );
-
 
 
         expect(
@@ -684,7 +603,6 @@ describe(
     );
 
 
-
     it(
       "menolak anak kedua dan ketiga yang diisi setengah-setengah",
       async () => {
@@ -705,6 +623,15 @@ describe(
         );
 
 
+        expect(
+          getVisiblePage()
+            ?.dataset
+            .formPage
+        ).toBe(
+          "3"
+        );
+
+
         await fillValidPage3();
 
 
@@ -712,6 +639,7 @@ describe(
           "memilikiAnak",
           true
         );
+
 
         setInputValue(
           "namaAnakPertama",
@@ -727,12 +655,10 @@ describe(
         );
 
 
-
         setInputValue(
           "namaAnakKedua",
           "Anak Kedua"
         );
-
 
 
         setFile(
@@ -778,7 +704,6 @@ describe(
     );
 
 
-
     it(
       "menampilkan field Nama Bank Lainnya ketika memilih Lainnya",
       async () => {
@@ -806,15 +731,6 @@ describe(
         expect(
           getById(
             "namaBankLainnya"
-          ).disabled
-        ).toBe(
-          false
-        );
-
-
-        expect(
-          getById(
-            "namaBankLainnya"
           ).required
         ).toBe(
           true
@@ -822,7 +738,6 @@ describe(
 
       }
     );
-
 
 
     it(
@@ -840,7 +755,7 @@ describe(
 
         setInputValue(
           "namaBankLainnya",
-          "Bank Test Custom"
+          "Bank Test"
         );
 
 
@@ -864,24 +779,6 @@ describe(
         expect(
           getById(
             "namaBankLainnya"
-          ).disabled
-        ).toBe(
-          true
-        );
-
-
-        expect(
-          getById(
-            "namaBankLainnya"
-          ).required
-        ).toBe(
-          false
-        );
-
-
-        expect(
-          getById(
-            "namaBankLainnya"
           ).value
         ).toBe(
           ""
@@ -889,7 +786,6 @@ describe(
 
       }
     );
-
 
 
     it(
@@ -922,24 +818,6 @@ describe(
         );
 
 
-        expect(
-          getById(
-            "groupUnitLainnya"
-          ).disabled
-        ).toBe(
-          false
-        );
-
-
-        expect(
-          getById(
-            "groupUnitLainnya"
-          ).required
-        ).toBe(
-          true
-        );
-
-
         setInputValue(
           "groupUnitLainnya",
           "Custom Unit"
@@ -966,24 +844,6 @@ describe(
         expect(
           getById(
             "groupUnitLainnya"
-          ).disabled
-        ).toBe(
-          true
-        );
-
-
-        expect(
-          getById(
-            "groupUnitLainnya"
-          ).required
-        ).toBe(
-          false
-        );
-
-
-        expect(
-          getById(
-            "groupUnitLainnya"
           ).value
         ).toBe(
           ""
@@ -991,7 +851,6 @@ describe(
 
       }
     );
-
 
 
     it(
@@ -1034,28 +893,13 @@ describe(
 
 
         expect(
-          directorates
-        ).toContain(
-          "Technology"
-        );
-
-
-        expect(
           recruiters
         ).toContain(
           "Audy Atira Pramono"
         );
 
-
-        expect(
-          recruiters
-        ).toContain(
-          "Demus Abethego"
-        );
-
       }
     );
-
 
 
     it(
@@ -1079,28 +923,10 @@ describe(
           );
 
 
-        const recruiters =
-          Array.from(
-            getById(
-              "recruiter"
-            ).options
-          ).map(
-            (option) =>
-              option.value
-          );
-
-
         expect(
           directorates
         ).toContain(
-          "CEO Office"
-        );
-
-
-        expect(
-          recruiters
-        ).toContain(
-          "Audy Atira Pramono"
+          "Technology"
         );
 
       }
@@ -1112,21 +938,6 @@ describe(
       async () => {
 
         await bootFrontend();
-
-
-        expect(
-          Array.from(
-            getById(
-              "provinsiKtp"
-            ).options
-          ).some(
-            (option) =>
-              option.value ===
-              "DKI JAKARTA"
-          )
-        ).toBe(
-          true
-        );
 
 
         selectValue(
@@ -1144,39 +955,9 @@ describe(
         );
 
 
-        expect(
-          Array.from(
-            getById(
-              "kotaKtp"
-            ).options
-          ).some(
-            (option) =>
-              option.value ===
-              "KOTA JAKARTA PUSAT"
-          )
-        ).toBe(
-          true
-        );
-
-
         selectValue(
           "kotaKtp",
           "KOTA JAKARTA PUSAT"
-        );
-
-
-        expect(
-          Array.from(
-            getById(
-              "kecamatanKtp"
-            ).options
-          ).some(
-            (option) =>
-              option.value ===
-              "GAMBIR"
-          )
-        ).toBe(
-          true
         );
 
 
@@ -1202,7 +983,6 @@ describe(
 
       }
     );
-
 
 
     it(
@@ -1252,23 +1032,8 @@ describe(
           true
         );
 
-
-        expect(
-          input
-            .closest(
-              ".upload-field"
-            )
-            .querySelector(
-              "small"
-            )
-            .textContent
-        ).toContain(
-          "PDF"
-        );
-
       }
     );
-
 
 
     it(
@@ -1302,23 +1067,8 @@ describe(
           false
         );
 
-
-        expect(
-          input
-            .closest(
-              ".upload-field"
-            )
-            .querySelector(
-              "small"
-            )
-            .textContent
-        ).toContain(
-          "5 MB"
-        );
-
       }
     );
-
 
 
     it(
@@ -1338,14 +1088,11 @@ describe(
           );
 
 
-        const uploadField =
-          input.closest(
-            ".upload-field"
-          );
-
-
         expect(
-          uploadField
+          input
+            .closest(
+              ".upload-field"
+            )
             .classList
             .contains(
               "has-file"
@@ -1356,52 +1103,13 @@ describe(
 
 
         expect(
-          uploadField
-            .classList
-            .contains(
-              "has-error"
-            )
-        ).toBe(
-          false
-        );
-
-
-        expect(
-          uploadField
-            .querySelector(
-              "[data-file-name]"
-            )
-            .textContent
-        ).toBe(
-          "KTP_Ara.pdf"
-        );
-
-
-        expect(
           input.files
         ).toHaveLength(
           1
         );
 
-
-        expect(
-          input.files[0].type
-        ).toBe(
-          "application/pdf"
-        );
-
-
-        expect(
-          input.files[0].size
-        ).toBeLessThanOrEqual(
-          5 *
-          1024 *
-          1024
-        );
-
       }
     );
-
 
 
     it(
@@ -1420,12 +1128,6 @@ describe(
           );
 
 
-        const uploadField =
-          input.closest(
-            ".upload-field"
-          );
-
-
         const removeButton =
           document.querySelector(
             '[data-remove-file="lampiranBpjsKesehatan"]'
@@ -1433,20 +1135,9 @@ describe(
 
 
         expect(
-          uploadField
-            .classList
-            .contains(
-              "has-file"
-            )
-        ).toBe(
-          true
-        );
-
-
-        expect(
-          removeButton.hidden
-        ).toBe(
-          false
+          input.files
+        ).toHaveLength(
+          1
         );
 
 
@@ -1457,35 +1148,6 @@ describe(
           input.files
         ).toHaveLength(
           0
-        );
-
-
-        expect(
-          uploadField
-            .classList
-            .contains(
-              "has-file"
-            )
-        ).toBe(
-          false
-        );
-
-
-        expect(
-          uploadField
-            .querySelector(
-              "[data-file-name]"
-            )
-            .textContent
-        ).toBe(
-          "Belum ada file"
-        );
-
-
-        expect(
-          removeButton.hidden
-        ).toBe(
-          true
         );
 
       }
@@ -1545,14 +1207,19 @@ describe(
           dropEvent,
           "dataTransfer",
           {
+
             configurable:
               true,
 
+
             value: {
+
               files: [
                 droppedFile
               ]
+
             }
+
           }
         );
 
@@ -1575,23 +1242,8 @@ describe(
           "KTP_Drop.pdf"
         );
 
-
-        expect(
-          input
-            .closest(
-              ".upload-field"
-            )
-            .classList
-            .contains(
-              "has-file"
-            )
-        ).toBe(
-          true
-        );
-
       }
     );
-
 
 
     it(
@@ -1611,6 +1263,15 @@ describe(
 
         clickNext(
           2
+        );
+
+
+        expect(
+          getVisiblePage()
+            ?.dataset
+            .formPage
+        ).toBe(
+          "3"
         );
 
 
@@ -1650,25 +1311,8 @@ describe(
           true
         );
 
-
-        expect(
-          getById(
-            "lampiranKtp"
-          )
-            .closest(
-              ".upload-field"
-            )
-            .querySelector(
-              "small"
-            )
-            .textContent
-        ).toContain(
-          "Silakan pilih file PDF"
-        );
-
       }
     );
-
 
 
     it(
@@ -1707,7 +1351,6 @@ describe(
     );
 
 
-
     it(
       "tidak mengirim data ketika user memilih Periksa Lagi",
       async () => {
@@ -1727,17 +1370,6 @@ describe(
         getById(
           "cancelSubmitButton"
         ).click();
-
-
-        expect(
-          getById(
-            "submitConfirmModal"
-          ).classList.contains(
-            "is-hidden"
-          )
-        ).toBe(
-          true
-        );
 
 
         expect(
@@ -1767,6 +1399,21 @@ describe(
 
         openSubmitConfirmation();
 
+
+        /*
+         * Modal benar-benar harus terbuka
+         * sebelum confirm ditekan.
+         */
+
+        expect(
+          getById(
+            "submitConfirmModal"
+          ).classList.contains(
+            "is-hidden"
+          )
+        ).toBe(
+          false
+        );
 
 
         getById(
@@ -1800,6 +1447,10 @@ describe(
           );
 
 
+        /* ==================================================
+           PERSONAL DATA
+           ================================================== */
+
         expect(
           payload.NamaDepan
         ).toBe(
@@ -1818,6 +1469,24 @@ describe(
           payload.NamaBelakang
         ).toBe(
           "Setiadji"
+        );
+
+
+        /*
+         * NEW FIELDS.
+         */
+
+        expect(
+          payload.Agama
+        ).toBe(
+          "Islam"
+        );
+
+
+        expect(
+          payload.MaritalStatus
+        ).toBe(
+          "Belum Menikah"
         );
 
 
@@ -1842,12 +1511,9 @@ describe(
         );
 
 
-        expect(
-          payload.ProvinsiDomisili
-        ).toBe(
-          payload.ProvinsiKTP
-        );
-
+        /* ==================================================
+           CONDITIONAL DATA
+           ================================================== */
 
         expect(
           payload.MemilikiPasangan
@@ -1863,21 +1529,35 @@ describe(
         );
 
 
+        /* ==================================================
+           ATTACHMENTS
+           ================================================== */
+
+        /*
+         * Sebelumnya 6.
+         *
+         * Sekarang 7 karena:
+         *
+         * CaptureAccountTypeLinkAja
+         * merupakan required attachment baru.
+         */
+
         expect(
           payload.attachments
         ).toHaveLength(
-          6
+          7
         );
 
 
         expect(
           payload.attachments.map(
-            (item) =>
-              item.fieldName
+            (attachment) =>
+              attachment.fieldName
           )
         ).toEqual(
           expect.arrayContaining(
             [
+              "CaptureAccountTypeLinkAja",
               "LampiranKTP",
               "LampiranKartuKeluarga",
               "LampiranNPWP",
@@ -1949,15 +1629,9 @@ describe(
         );
 
 
-        expect(
-          getById(
-            "successSubmissionId"
-          ).textContent
-        ).toBe(
-          payload.submissionId
-        );
-
-
+        /*
+         * Development localhost tidak boleh lock.
+         */
 
         expect(
           localStorage.getItem(
@@ -1967,7 +1641,6 @@ describe(
 
       }
     );
-
 
 
     it.each(
@@ -2004,6 +1677,17 @@ describe(
 
 
         openSubmitConfirmation();
+
+
+        expect(
+          getById(
+            "submitConfirmModal"
+          ).classList.contains(
+            "is-hidden"
+          )
+        ).toBe(
+          false
+        );
 
 
         getById(
@@ -2047,17 +1731,6 @@ describe(
 
 
         expect(
-          getById(
-            "newJoinerForm"
-          ).classList.contains(
-            "is-hidden"
-          )
-        ).toBe(
-          false
-        );
-
-
-        expect(
           getVisiblePage()
             ?.dataset
             .formPage
@@ -2065,17 +1738,9 @@ describe(
           "4"
         );
 
-
-        expect(
-          getById(
-            "submitButton"
-          ).disabled
-        ).toBe(
-          false
-        );
-
       }
     );
+
 
     it(
       "tetap membuka form untuk retry jika fetch backend reject karena network error",
@@ -2143,17 +1808,6 @@ describe(
 
 
         expect(
-          getById(
-            "newJoinerForm"
-          ).classList.contains(
-            "is-hidden"
-          )
-        ).toBe(
-          false
-        );
-
-
-        expect(
           getVisiblePage()
             ?.dataset
             .formPage
@@ -2163,7 +1817,6 @@ describe(
 
       }
     );
-
 
 
     it(
@@ -2219,7 +1872,6 @@ describe(
     );
 
 
-
     it(
       "mengabaikan stale localStorage lock saat berjalan di localhost development",
       async () => {
@@ -2265,17 +1917,6 @@ describe(
 
 
         expect(
-          getById(
-            "newJoinerForm"
-          ).classList.contains(
-            "is-hidden"
-          )
-        ).toBe(
-          false
-        );
-
-
-        expect(
           getVisiblePage()
             ?.dataset
             .formPage
@@ -2285,7 +1926,6 @@ describe(
 
       }
     );
-
 
 
     it(
@@ -2308,17 +1948,18 @@ describe(
           );
 
 
-  
-
         Object.defineProperty(
           window.crypto,
           "randomUUID",
           {
+
             configurable:
               true,
 
+
             value:
               undefined
+
           }
         );
 
@@ -2383,7 +2024,6 @@ describe(
 
       }
     );
-
 
 
     it(

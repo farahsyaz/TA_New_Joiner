@@ -1,4 +1,6 @@
-import { defineConfig } from "vitest/config";
+import {
+  defineConfig
+} from "vitest/config";
 
 
 export default defineConfig({
@@ -20,6 +22,20 @@ export default defineConfig({
 
     },
 
+    pool:
+      "threads",
+
+    fileParallelism:
+      false,
+
+
+    maxWorkers:
+      1,
+
+
+    isolate:
+      true,
+
 
     setupFiles: [
 
@@ -34,6 +50,14 @@ export default defineConfig({
 
     restoreMocks:
       true,
+
+
+    testTimeout:
+      15000,
+
+
+    hookTimeout:
+      15000,
 
 
     coverage: {

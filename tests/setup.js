@@ -3,14 +3,22 @@ import {
   vi
 } from "vitest";
 
-
 Object.defineProperty(
   window,
   "scrollTo",
   {
-    configurable: true,
-    writable: true,
-    value: vi.fn()
+
+    configurable:
+      true,
+
+
+    writable:
+      true,
+
+
+    value:
+      vi.fn()
+
   }
 );
 
@@ -19,18 +27,27 @@ Object.defineProperty(
   window.Element.prototype,
   "scrollIntoView",
   {
-    configurable: true,
-    writable: true,
-    value: vi.fn()
+
+    configurable:
+      true,
+
+
+    writable:
+      true,
+
+
+    value:
+      vi.fn()
+
   }
 );
-
 
 class MockDataTransfer {
 
   constructor() {
 
-    this._files = [];
+    this._files =
+      [];
 
 
     this.items = {
@@ -61,9 +78,18 @@ Object.defineProperty(
   globalThis,
   "DataTransfer",
   {
-    configurable: true,
-    writable: true,
-    value: MockDataTransfer
+
+    configurable:
+      true,
+
+
+    writable:
+      true,
+
+
+    value:
+      MockDataTransfer
+
   }
 );
 
@@ -72,17 +98,38 @@ Object.defineProperty(
   window,
   "DataTransfer",
   {
-    configurable: true,
-    writable: true,
-    value: MockDataTransfer
+
+    configurable:
+      true,
+
+
+    writable:
+      true,
+
+
+    value:
+      MockDataTransfer
+
   }
 );
 
-
 afterEach(
-  () => {
+  async () => {
+
+    await new Promise(
+      (resolvePromise) => {
+
+        setTimeout(
+          resolvePromise,
+          100
+        );
+
+      }
+    );
+
 
     vi.restoreAllMocks();
+
 
     vi.unstubAllGlobals();
 

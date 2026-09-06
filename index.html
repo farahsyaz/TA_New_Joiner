@@ -102,12 +102,19 @@
 
           <div class="intro-copy">
 
-            <p>
-              Selamat datang
-              <strong>#OfficialLinkAja!</strong>
-              Pada sesi ini Anda diharapkan mengisi informasi
-              data pribadi secara lengkap.
-            </p>
+            <div class="intro-title">
+
+              <h2>
+                Selamat datang
+                <strong>#OfficialLinkAja!</strong>
+              </h2>
+
+              <p>
+                Pada sesi ini Anda diharapkan mengisi informasi
+                data pribadi secara lengkap.
+              </p>
+
+            </div>
 
             <p>
               Siapkan dokumen dalam bentuk
@@ -134,8 +141,9 @@
                 </li>
 
                 <li>KTP Pasangan*</li>
-                <li>KTP / Akte Lahir Anak*</li>
+                <li>KIA/Akte Lahir*</li>
                 <li>Signed Offer Proposal</li>
+                <li>Capture Account Type LinkAja (Full Service)</li>
               </ol>
 
             </div>
@@ -313,6 +321,106 @@
                   type="date"
                   required
                 >
+
+              </div>
+
+            </div>
+
+
+            <div class="grid two">
+
+              <div class="field">
+
+                <label for="agama">
+                  Agama (sesuai KTP)
+                  <b>*</b>
+                </label>
+
+                <select
+                  id="agama"
+                  name="Agama"
+                  required
+                >
+
+                  <option
+                    value=""
+                    selected
+                    disabled
+                  >
+                    Pilih agama
+                  </option>
+
+                  <option value="Islam">
+                    Islam
+                  </option>
+
+                  <option value="Kristen">
+                    Kristen
+                  </option>
+
+                  <option value="Katolik">
+                    Katolik
+                  </option>
+
+                  <option value="Hindu">
+                    Hindu
+                  </option>
+
+                  <option value="Buddha">
+                    Buddha
+                  </option>
+
+                  <option value="Konghucu">
+                    Konghucu
+                  </option>
+
+                  <option value="Kepercayaan terhadap Tuhan YME">
+                    Kepercayaan terhadap Tuhan YME
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="field">
+
+                <label for="maritalStatus">
+                  Marital Status
+                  <b>*</b>
+                </label>
+
+                <select
+                  id="maritalStatus"
+                  name="MaritalStatus"
+                  required
+                >
+
+                  <option
+                    value=""
+                    selected
+                    disabled
+                  >
+                    Pilih marital status
+                  </option>
+
+                  <option value="Belum Menikah">
+                    Belum Menikah
+                  </option>
+
+                  <option value="Menikah">
+                    Menikah
+                  </option>
+
+                  <option value="Cerai Hidup">
+                    Cerai Hidup
+                  </option>
+
+                  <option value="Cerai Mati">
+                    Cerai Mati
+                  </option>
+
+                </select>
 
               </div>
 
@@ -833,6 +941,60 @@
 
             </div>
 
+
+            <div class="upload-field">
+
+              <label for="captureAccountTypeLinkAja">
+                Capture Account Type LinkAja (Full Service)
+                <b>*</b>
+              </label>
+
+              <div class="upload-control">
+
+                <label
+                  class="upload-box"
+                  for="captureAccountTypeLinkAja"
+                >
+
+                  <input
+                    id="captureAccountTypeLinkAja"
+                    name="CaptureAccountTypeLinkAja"
+                    class="file-input"
+                    type="file"
+                    accept=".pdf,application/pdf"
+                    required
+                  >
+
+                  <span class="upload-button">
+                    Pilih file
+                  </span>
+
+                  <i data-file-name>
+                    Belum ada file
+                  </i>
+
+                </label>
+
+
+                <button
+                  type="button"
+                  class="remove-file-button"
+                  data-remove-file="captureAccountTypeLinkAja"
+                  hidden
+                >
+                  Hapus
+                </button>
+
+              </div>
+
+              <small
+                data-default-text="Format: CaptureAccountTypeLinkAja_Nama.pdf • Maksimal 5 MB"
+              >
+                Format: CaptureAccountTypeLinkAja_Nama.pdf • Maksimal 5 MB
+              </small>
+
+            </div>
+
           </section>
 
 
@@ -1077,7 +1239,8 @@
                 >
 
                 <small>
-                  Isi 0 jika belum memiliki NPWP.
+                  Isi 0 jika belum memiliki NPWP. Jika tidak memiliki NPWP,
+                  lampirkan KTP pada field Lampiran NPWP.
                 </small>
 
               </div>
@@ -1113,11 +1276,6 @@
                   <option value="K/1">K/1</option>
                   <option value="K/2">K/2</option>
                   <option value="K/3">K/3</option>
-
-                  <option value="K/I/0">K/I/0</option>
-                  <option value="K/I/1">K/I/1</option>
-                  <option value="K/I/2">K/I/2</option>
-                  <option value="K/I/3">K/I/3</option>
 
                 </select>
 
@@ -1171,9 +1329,9 @@
 
 
                 <small
-                  data-default-text="Format: NPWP_Nama.pdf • Maksimal 5 MB"
+                  data-default-text="Format: NPWP_Nama.pdf • Jika tidak memiliki NPWP, lampirkan KTP • Maksimal 5 MB"
                 >
-                  Format: NPWP_Nama.pdf • Maksimal 5 MB
+                  Format: NPWP_Nama.pdf • Jika tidak memiliki NPWP, lampirkan KTP • Maksimal 5 MB
                 </small>
 
               </div>
@@ -1707,16 +1865,16 @@
                     UOB Indonesia
                   </option>
 
-                  <option value="Bank Jago">
-                    Bank Jago
+                  <option value="Bank Sinarmas">
+                    Bank Sinarmas
                   </option>
 
-                  <option value="SeaBank">
-                    SeaBank
+                  <option value="Bank BTPN">
+                    Bank BTPN
                   </option>
 
                   <option value="Lainnya">
-                    Bank Lainnya
+                    Bank Lain
                   </option>
 
                 </select>
@@ -2230,15 +2388,20 @@
             <div class="field">
 
               <label for="posisi">
-                Posisi
+                Jabatan
                 <b>*</b>
               </label>
 
               <input
                 id="posisi"
                 name="Posisi"
+                placeholder="Contoh: Software Engineer, Product Manager, Business Analyst"
                 required
               >
+
+              <small>
+                Masukkan nama jabatan sesuai penempatan.
+              </small>
 
             </div>
 
