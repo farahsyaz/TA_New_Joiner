@@ -2,7 +2,7 @@
   "use strict";
 
   const POWER_AUTOMATE_URL =
-    "https://defaultce2a22364fea4cc9841385fac29c93.67.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/16/workflows/6e6642cbf1a24c0d9d53c15f7803c3a2/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=y4I6h7WdbNoXOF3VVWZA0g8RbBlZtn3CgM8PYMQaP48";
+    "https://defaultce2a22364fea4cc9841385fac29c93.67.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/07/workflows/6e376faee9ac4495916f4c22d9d0261b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=i-OA7NrW3TVxmTrsvyf0z2giFW3PS-B7ke2srn56kYs";
 
 
   const MAX_FILE_SIZE =
@@ -4354,6 +4354,50 @@
   if (
     !restoreSubmittedState()
   ) {
+      (function addAnotherResponseButton() {
+
+    if (getElement("anotherResponseWrapper")) {
+      return;
+    }
+
+    const wrapper = document.createElement("div");
+
+    wrapper.id = "anotherResponseWrapper";
+    wrapper.style.cssText =
+      "display:flex;flex-direction:column;align-items:center;" +
+      "justify-content:center;text-align:center;gap:12px;margin-top:32px;";
+
+    const question = document.createElement("p");
+
+    question.textContent = "Jika ada data yang keliru silahkan isi form lagi";
+    question.style.margin = "0";
+
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.id = "anotherResponseButton";
+    button.textContent = "Isi Formulir Lagi";
+    button.style.cssText =
+      "padding:12px 24px;border:0;border-radius:8px;cursor:pointer;" +
+      "font:inherit;font-weight:600;background:#e11d48;color:#fff;";
+
+        button.addEventListener("click", () => {
+
+      try {
+        localStorage.removeItem(SUBMITTED_STORAGE_KEY);
+        localStorage.removeItem(SUBMISSION_ID_STORAGE_KEY);
+      } catch {
+      }
+
+      window.open(window.location.href, "_blank", "noopener");
+
+    });
+
+    wrapper.appendChild(question);
+    wrapper.appendChild(button);
+    submissionSuccess.appendChild(wrapper);
+
+  })();
 
     showPage(
       1
